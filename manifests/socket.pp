@@ -64,9 +64,7 @@ define opendkim::socket(
       fail("Unsupported type: ${type}\n")
     }
   }
-  concat::fragment{ $socket:
-    target  => '/etc/default/opendkim',
-    content => "SOCKET=${socket} # ${name}\n",
-    order   => 10;
+  file { '/etc/default/opendkim':
+    content => "SOCKET=${socket}",
   }
 }
